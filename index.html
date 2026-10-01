@@ -326,119 +326,745 @@
 <script>
     // DADOS INICIAIS
     let dados = [
-        {casa: 1, moradores: ["Daniely"]},
-        {casa: 7, moradores: ["Karol Faria"]},
-        {casa: 21, moradores: ["Renata Cynara", "??"]},
-        {casa: 24, moradores: ["Renata Carrelo"]},
-        {casa: 25, moradores: ["Adrielle", "João Caetano"]},
-        {casa: 26, moradores: ["Elaine Cristina"]},
-        {casa: 35, moradores: ["Frauziele", "Victor R."]},
-        {casa: 40, moradores: ["Maycon Torres", "Yuri Rosa"]},
-        {casa: 46, moradores: ["Marcia", "??"]},
-        {casa: 57, moradores: ["??"]},
-        {casa: 75, moradores: ["Ruan", "Lorenna"]},
-        {casa: 91, moradores: ["??"]},
-        {casa: 93, moradores: ["Rodolpho"]},
-        {casa: 94, moradores: ["??"]},
-        {casa: 95, moradores: ["Raquel"]},
-        {casa: 97, moradores: ["Beth"]},
-        {casa: 98, moradores: ["Ana Claudia", "Jorcy"]},
-        {casa: 99, moradores: ["Clenilda", "Poletto"]},
-        {casa: 101, moradores: ["Caio", "Jéssica Moreno"]},
-        {casa: 106, moradores: ["Gabi"]},
-        {casa: 108, moradores: ["Jonathan", "Patrícia Leitte"]},
-        {casa: 109, moradores: ["Dolce Festas"]},
-        {casa: 110, moradores: ["Carlos", "Luzinete"]},
-        {casa: 114, moradores: ["Aline", "Massive Motors"]},
-        {casa: 122, moradores: ["Poliana"]},
-        {casa: 123, moradores: ["Sara"]},
-        {casa: 124, moradores: ["Ícaro", "Annyana"]},
-        {casa: 140, moradores: ["Fabiany"]},
-        {casa: 141, moradores: ["Delânia"]},
-        {casa: 148, moradores: ["Giseli", "Stephanie"]},
-        {casa: 149, moradores: ["Claudia Vielela"]},
-        {casa: 150, moradores: ["Carlos Henrique"]},
-        {casa: 151, moradores: ["Renata Dobashi"]},
-        {casa: 154, moradores: ["Flaviana"]},
-        {casa: 156, moradores: ["Nelito Rezende", "Larissa de Barros"]},
-        {casa: 157, moradores: ["Ricardo"]},
-        {casa: 158, moradores: ["Julia Stefany", "Andre G."]},
-        {casa: 159, moradores: ["Letícia"]},
-        {casa: 160, moradores: ["Edilaine"]},
-        {casa: 161, moradores: ["Cícero"]},
-        {casa: 162, moradores: ["Lucas Ferreira"]},
-        {casa: 165, moradores: ["Amanda", "Hebert"]},
-        {casa: 166, moradores: ["Caroline", "Dennis"]},
-        {casa: 167, moradores: ["Pabila Arruda", "??"]},
-        {casa: 168, moradores: ["Joyce B."]},
-        {casa: 169, moradores: ["??"]},
-        {casa: 171, moradores: ["Sumayka"]},
-        {casa: 172, moradores: ["Marciano Alves", "Naiara"]},
-        {casa: 174, moradores: ["DTA SEG", "Kamilly"]},
-        {casa: 175, moradores: ["Fernando P.", "Iza"]},
-        {casa: 176, moradores: ["Emanuella", "Nova Náutica"]},
-        {casa: 179, moradores: ["Karla Campos", "Robson Melo"]},
-        {casa: 181, moradores: ["Rojackson", "Bruna P.", "João Vitor"]},
-        {casa: 182, moradores: ["Claudia Vilela"]},
-        {casa: 184, moradores: ["Luana Camacho", "Alessandro"]},
-        {casa: 185, moradores: ["Claudia Vilela"]},
-        {casa: 186, moradores: ["Rogeane"]},
-        {casa: 187, moradores: ["Ka Kisque", "??"]},
-        {casa: 197, moradores: ["Guilherme Casa Bella"]},
-        {casa: 199, moradores: ["Leonardo"]},
-        {casa: 201, moradores: ["Salute"]},
-        {casa: 202, moradores: ["Cida"]},
-        {casa: 203, moradores: ["Adriany"]},
-        {casa: 204, moradores: ["Lauro", "Thamires R."]},
-        {casa: 205, moradores: ["Amanda P."]},
-        {casa: 206, moradores: ["Wesley", "Laura", "Junior Siqueira"]},
-        {casa: 207, moradores: ["Brenda", "Nattan"]},
-        {casa: 209, moradores: ["Alice", "Luiz Carlos"]},
-        {casa: 216, moradores: ["Anderson Arruda"]},
-        {casa: 217, moradores: ["Junior Campos", "Karimi Coutinho "]},
-        {casa: 218, moradores: ["Joe"]},
-        {casa: 219, moradores: ["??", "Bruna"]},
-        {casa: 221, moradores: ["Jaison"]},
-        {casa: 222, moradores: ["Uziel"]},
-        {casa: 224, moradores: ["Ketinny", "Williams"]},
-        {casa: 225, moradores: ["Thiago Vieira", "Aline Thomaz"]},
-        {casa: 226, moradores: ["Luiz F."]},
-        {casa: 228, moradores: ["Lucia", "Rodrigues"]},
-        {casa: 229, moradores: ["Bianca", "DJ HR"]},
-        {casa: 231, moradores: ["Selma"]},
-        {casa: 234, moradores: ["Marta"]},
-        {casa: 239, moradores: ["Camila A.", "Deiner"]},
-        {casa: 240, moradores: ["Nathane", "Alex"]},
-        {casa: 241, moradores: ["Jackie", "Maria Brechó"]},
-        {casa: 243, moradores: ["Anara"]},
-        {casa: 244, moradores: ["Carmen"]},
-        {casa: 245, moradores: ["Edshow", "Pâm"]},
-        {casa: 248, moradores: ["Maria Margareth"]},
-        {casa: 249, moradores: ["Lidy"]},
-        {casa: 250, moradores: ["Israel", "Rayssa"]},
-        {casa: 251, moradores: ["Lucas", "Vitoria Arruda"]},
-        {casa: 253, moradores: ["Kellen Lobo", "Vitor Carvalho"]},
-        {casa: 254, moradores: ["Marley", "Retífica de Motores"]},
-        {casa: 257, moradores: ["Clara"]},
-        {casa: 258, moradores: ["Raiza Boabaid"]},
-        {casa: 261, moradores: ["Nilson", "Glória"]},
-        {casa: 264, moradores: ["??", "??"]},
-        {casa: 265, moradores: ["Hugo", "Jessica Lopes"]},
-        {casa: 266, moradores: ["Tereza Ramalho", "José Carlos"]},
-        {casa: 267, moradores: ["Márcia"]},
-        {casa: 273, moradores: ["Eliane Costa", "Marcelo Ferreira"]},
-        {casa: 275, moradores: ["Dejacy"]},
-        {casa: 279, moradores: ["Hérika"]},
-        {casa: 283, moradores: ["Daiane"]},
-        {casa: 286, moradores: ["Márcia"]},
-        {casa: 290, moradores: ["Endrigo"]},
-        {casa: 291, moradores: ["Rosivaldo"]},
-        {casa: 292, moradores: ["Jéssica", "Luismar"]},
-        {casa: 295, moradores: ["Daiane", "Ricardo Ribeiro"]},
-        {casa: 297, moradores: ["Mychelly"]},
-        {casa: 298, moradores: ["Ana", "Caio Jorge"]},
-        {casa: 299, moradores: ["Jony Costa", "Gracielle"]}
-    ];
+        {
+                "casa": 1,
+                "moradores": [
+                        "Daniely"
+                ]
+        },
+        {
+                "casa": 7,
+                "moradores": [
+                        "Karol Faria"
+                ]
+        },
+        {
+                "casa": 21,
+                "moradores": [
+                        "Renata Cynara",
+                        "??"
+                ]
+        },
+        {
+                "casa": 24,
+                "moradores": [
+                        "Renata Carrelo"
+                ]
+        },
+        {
+                "casa": 25,
+                "moradores": [
+                        "Adrielle",
+                        "João Caetano"
+                ]
+        },
+        {
+                "casa": 26,
+                "moradores": [
+                        "Elaine Cristina"
+                ]
+        },
+        {
+                "casa": 35,
+                "moradores": [
+                        "Frauziele",
+                        "Victor R."
+                ]
+        },
+        {
+                "casa": 40,
+                "moradores": [
+                        "Maycon Torres",
+                        "Yuri Rosa"
+                ]
+        },
+        {
+                "casa": 46,
+                "moradores": [
+                        "Marcia",
+                        "??"
+                ]
+        },
+        {
+                "casa": 57,
+                "moradores": [
+                        "??"
+                ]
+        },
+        {
+                "casa": 75,
+                "moradores": [
+                        "Ruan",
+                        "Lorenna"
+                ]
+        },
+        {
+                "casa": 91,
+                "moradores": [
+                        "??"
+                ]
+        },
+        {
+                "casa": 93,
+                "moradores": [
+                        "Rodolpho"
+                ]
+        },
+        {
+                "casa": 94,
+                "moradores": [
+                        "??"
+                ]
+        },
+        {
+                "casa": 95,
+                "moradores": [
+                        "Raquel"
+                ]
+        },
+        {
+                "casa": 97,
+                "moradores": [
+                        "Beth"
+                ]
+        },
+        {
+                "casa": 98,
+                "moradores": [
+                        "Ana Claudia",
+                        "Jorcy"
+                ]
+        },
+        {
+                "casa": 99,
+                "moradores": [
+                        "Clenilda",
+                        "Poletto"
+                ]
+        },
+        {
+                "casa": 101,
+                "moradores": [
+                        "Caio",
+                        "Jéssica Moreno"
+                ]
+        },
+        {
+                "casa": 106,
+                "moradores": [
+                        "Gabi"
+                ]
+        },
+        {
+                "casa": 108,
+                "moradores": [
+                        "Jonathan",
+                        "Patrícia Leitte"
+                ]
+        },
+        {
+                "casa": 109,
+                "moradores": [
+                        "Dolce Festas"
+                ]
+        },
+        {
+                "casa": 110,
+                "moradores": [
+                        "Carlos",
+                        "Luzinete"
+                ]
+        },
+        {
+                "casa": 114,
+                "moradores": [
+                        "Aline",
+                        "Massive Motors"
+                ]
+        },
+        {
+                "casa": 122,
+                "moradores": [
+                        "Poliana"
+                ]
+        },
+        {
+                "casa": 123,
+                "moradores": [
+                        "Sara"
+                ]
+        },
+        {
+                "casa": 124,
+                "moradores": [
+                        "Ícaro",
+                        "Annyana"
+                ]
+        },
+        {
+                "casa": 140,
+                "moradores": [
+                        "Fabiany"
+                ]
+        },
+        {
+                "casa": 141,
+                "moradores": [
+                        "Delânia"
+                ]
+        },
+        {
+                "casa": 148,
+                "moradores": [
+                        "Giseli",
+                        "Stephanie"
+                ]
+        },
+        {
+                "casa": 149,
+                "moradores": [
+                        "Claudia Vielela"
+                ]
+        },
+        {
+                "casa": 150,
+                "moradores": [
+                        "Carlos Henrique"
+                ]
+        },
+        {
+                "casa": 151,
+                "moradores": [
+                        "Renata Dobashi"
+                ]
+        },
+        {
+                "casa": 154,
+                "moradores": [
+                        "Flaviana"
+                ]
+        },
+        {
+                "casa": 156,
+                "moradores": [
+                        "Nelito Rezende",
+                        "Larissa de Barros"
+                ]
+        },
+        {
+                "casa": 157,
+                "moradores": [
+                        "Ricardo"
+                ]
+        },
+        {
+                "casa": 158,
+                "moradores": [
+                        "Julia Stefany",
+                        "Andre G."
+                ]
+        },
+        {
+                "casa": 159,
+                "moradores": [
+                        "Letícia"
+                ]
+        },
+        {
+                "casa": 160,
+                "moradores": [
+                        "Edilaine"
+                ]
+        },
+        {
+                "casa": 161,
+                "moradores": [
+                        "Cícero"
+                ]
+        },
+        {
+                "casa": 162,
+                "moradores": [
+                        "Lucas Ferreira"
+                ]
+        },
+        {
+                "casa": 165,
+                "moradores": [
+                        "Amanda",
+                        "Hebert"
+                ]
+        },
+        {
+                "casa": 166,
+                "moradores": [
+                        "Caroline",
+                        "Dennis"
+                ]
+        },
+        {
+                "casa": 167,
+                "moradores": [
+                        "Pabila Arruda",
+                        "??"
+                ]
+        },
+        {
+                "casa": 168,
+                "moradores": [
+                        "Joyce B."
+                ]
+        },
+        {
+                "casa": 169,
+                "moradores": [
+                        "??"
+                ]
+        },
+        {
+                "casa": 171,
+                "moradores": [
+                        "Sumayka"
+                ]
+        },
+        {
+                "casa": 172,
+                "moradores": [
+                        "Marciano Alves",
+                        "Naiara"
+                ]
+        },
+        {
+                "casa": 174,
+                "moradores": [
+                        "DTA SEG",
+                        "Kamilly"
+                ]
+        },
+        {
+                "casa": 175,
+                "moradores": [
+                        "Fernando P.",
+                        "Iza"
+                ]
+        },
+        {
+                "casa": 176,
+                "moradores": [
+                        "Emanuella",
+                        "Nova Náutica"
+                ]
+        },
+        {
+                "casa": 179,
+                "moradores": [
+                        "Karla Campos",
+                        "Robson Melo"
+                ]
+        },
+        {
+                "casa": 181,
+                "moradores": [
+                        "Rojackson",
+                        "Bruna P.",
+                        "João Vitor"
+                ]
+        },
+        {
+                "casa": 182,
+                "moradores": [
+                        "Claudia Vilela"
+                ]
+        },
+        {
+                "casa": 184,
+                "moradores": [
+                        "Luana Camacho",
+                        "Alessandro"
+                ]
+        },
+        {
+                "casa": 185,
+                "moradores": [
+                        "Claudia Vilela"
+                ]
+        },
+        {
+                "casa": 186,
+                "moradores": [
+                        "Rogeane"
+                ]
+        },
+        {
+                "casa": 187,
+                "moradores": [
+                        "Ka Kisque",
+                        "??"
+                ]
+        },
+        {
+                "casa": 197,
+                "moradores": [
+                        "Guilherme Casa Bella"
+                ]
+        },
+        {
+                "casa": 199,
+                "moradores": [
+                        "Leonardo"
+                ]
+        },
+        {
+                "casa": 201,
+                "moradores": [
+                        "Salute"
+                ]
+        },
+        {
+                "casa": 202,
+                "moradores": [
+                        "Cida"
+                ]
+        },
+        {
+                "casa": 203,
+                "moradores": [
+                        "Adriany"
+                ]
+        },
+        {
+                "casa": 204,
+                "moradores": [
+                        "Lauro",
+                        "Thamires R."
+                ]
+        },
+        {
+                "casa": 205,
+                "moradores": [
+                        "Amanda P."
+                ]
+        },
+        {
+                "casa": 206,
+                "moradores": [
+                        "Wesley",
+                        "Laura",
+                        "Junior Siqueira"
+                ]
+        },
+        {
+                "casa": 207,
+                "moradores": [
+                        "Brenda",
+                        "Nattan"
+                ]
+        },
+        {
+                "casa": 209,
+                "moradores": [
+                        "Alice",
+                        "Luiz Carlos"
+                ]
+        },
+        {
+                "casa": 216,
+                "moradores": [
+                        "Anderson Arruda"
+                ]
+        },
+        {
+                "casa": 217,
+                "moradores": [
+                        "Junior Campos",
+                        "Karimi Coutinho "
+                ]
+        },
+        {
+                "casa": 218,
+                "moradores": [
+                        "Joe"
+                ]
+        },
+        {
+                "casa": 219,
+                "moradores": [
+                        "??",
+                        "Bruna"
+                ]
+        },
+        {
+                "casa": 221,
+                "moradores": [
+                        "Jaison"
+                ]
+        },
+        {
+                "casa": 222,
+                "moradores": [
+                        "Uziel"
+                ]
+        },
+        {
+                "casa": 224,
+                "moradores": [
+                        "Ketinny",
+                        "Williams"
+                ]
+        },
+        {
+                "casa": 225,
+                "moradores": [
+                        "Thiago Vieira",
+                        "Aline Thomaz"
+                ]
+        },
+        {
+                "casa": 226,
+                "moradores": [
+                        "Luiz F."
+                ]
+        },
+        {
+                "casa": 228,
+                "moradores": [
+                        "Lucia",
+                        "Rodrigues"
+                ]
+        },
+        {
+                "casa": 229,
+                "moradores": [
+                        "Bianca",
+                        "DJ HR"
+                ]
+        },
+        {
+                "casa": 231,
+                "moradores": [
+                        "Selma"
+                ]
+        },
+        {
+                "casa": 234,
+                "moradores": [
+                        "Marta"
+                ]
+        },
+        {
+                "casa": 239,
+                "moradores": [
+                        "Camila A.",
+                        "Deiner"
+                ]
+        },
+        {
+                "casa": 240,
+                "moradores": [
+                        "Nathane",
+                        "Alex"
+                ]
+        },
+        {
+                "casa": 241,
+                "moradores": [
+                        "Jackie",
+                        "Maria Brechó"
+                ]
+        },
+        {
+                "casa": 243,
+                "moradores": [
+                        "Anara"
+                ]
+        },
+        {
+                "casa": 244,
+                "moradores": [
+                        "Carmen"
+                ]
+        },
+        {
+                "casa": 245,
+                "moradores": [
+                        "Edshow",
+                        "Pâm"
+                ]
+        },
+        {
+                "casa": 248,
+                "moradores": [
+                        "Maria Margareth"
+                ]
+        },
+        {
+                "casa": 249,
+                "moradores": [
+                        "Lidy"
+                ]
+        },
+        {
+                "casa": 250,
+                "moradores": [
+                        "Israel",
+                        "Rayssa"
+                ]
+        },
+        {
+                "casa": 251,
+                "moradores": [
+                        "Lucas",
+                        "Vitoria Arruda"
+                ]
+        },
+        {
+                "casa": 253,
+                "moradores": [
+                        "Kellen Lobo",
+                        "Vitor Carvalho"
+                ]
+        },
+        {
+                "casa": 254,
+                "moradores": [
+                        "Marley",
+                        "Retífica de Motores"
+                ]
+        },
+        {
+                "casa": 257,
+                "moradores": [
+                        "Clara"
+                ]
+        },
+        {
+                "casa": 258,
+                "moradores": [
+                        "Raiza Boabaid"
+                ]
+        },
+        {
+                "casa": 261,
+                "moradores": [
+                        "Nilson",
+                        "Glória"
+                ]
+        },
+        {
+                "casa": 264,
+                "moradores": [
+                        "??",
+                        "??"
+                ]
+        },
+        {
+                "casa": 265,
+                "moradores": [
+                        "Hugo",
+                        "Jessica Lopes"
+                ]
+        },
+        {
+                "casa": 266,
+                "moradores": [
+                        "Tereza Ramalho",
+                        "José Carlos"
+                ]
+        },
+        {
+                "casa": 267,
+                "moradores": [
+                        "Márcia"
+                ]
+        },
+        {
+                "casa": 273,
+                "moradores": [
+                        "Eliane Costa",
+                        "Marcelo Ferreira"
+                ]
+        },
+        {
+                "casa": 275,
+                "moradores": [
+                        "Dejacy"
+                ]
+        },
+        {
+                "casa": 279,
+                "moradores": [
+                        "Hérika"
+                ]
+        },
+        {
+                "casa": 283,
+                "moradores": [
+                        "Daiane"
+                ]
+        },
+        {
+                "casa": 286,
+                "moradores": [
+                        "Márcia"
+                ]
+        },
+        {
+                "casa": 290,
+                "moradores": [
+                        "Endrigo"
+                ]
+        },
+        {
+                "casa": 291,
+                "moradores": [
+                        "Rosivaldo"
+                ]
+        },
+        {
+                "casa": 292,
+                "moradores": [
+                        "Jéssica",
+                        "Luismar"
+                ]
+        },
+        {
+                "casa": 294,
+                "moradores": [
+                        "Rodolfo",
+                        "Rodolfo",
+                        "Rodolfo",
+                        "Rodolfo",
+                        "Rodolfo"
+                ]
+        },
+        {
+                "casa": 295,
+                "moradores": [
+                        "Daiane",
+                        "Ricardo Ribeiro"
+                ]
+        },
+        {
+                "casa": 297,
+                "moradores": [
+                        "Mychelly"
+                ]
+        },
+        {
+                "casa": 298,
+                "moradores": [
+                        "Ana",
+                        "Caio Jorge"
+                ]
+        },
+        {
+                "casa": 299,
+                "moradores": [
+                        "Jony Costa",
+                        "Gracielle"
+                ]
+        }
+];
 
     // Carregar do localStorage se houver dados salvos previamente
     const dadosSalvos = localStorage.getItem('bahamas_moradores');
