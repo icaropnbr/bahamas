@@ -14,6 +14,8 @@
             --areia-escura: #e9c46a;
             --texto: #264653;
             --branco: #ffffff;
+            --sucesso: #2a9d8f;
+            --erro: #e76f51;
         }
 
         * {
@@ -27,6 +29,27 @@
             background-color: var(--areia);
             color: var(--texto);
             padding-bottom: 50px;
+        }
+
+        /* Ícone Secreto no Canto Superior Esquerdo */
+        .secret-admin-btn {
+            position: fixed;
+            top: 8px;
+            left: 8px;
+            background: transparent;
+            border: none;
+            color: var(--branco);
+            font-size: 1.2rem;
+            opacity: 0.15; /* Quase invisível */
+            cursor: pointer;
+            z-index: 999;
+            transition: opacity 0.3s, transform 0.2s;
+            padding: 5px;
+        }
+
+        .secret-admin-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.1);
         }
 
         header {
@@ -127,13 +150,120 @@
             font-style: italic;
         }
 
-        @media (max-width: 600px) {
-            header h1 { font-size: 1.8rem; }
-            .container { grid-template-columns: 1fr 1fr; }
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(3px);
+        }
+
+        .modal-box {
+            background: var(--branco);
+            width: 90%;
+            max-width: 480px;
+            border-radius: 15px;
+            padding: 25px 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-top: 6px solid var(--azul-oceano);
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-box h2 {
+            margin-bottom: 15px;
+            color: var(--azul-oceano);
+            font-size: 1.4rem;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--azul-oceano);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn:hover { opacity: 0.9; }
+        .btn-cancel { background: #e5e7eb; color: #374151; }
+        .btn-confirm { background: var(--azul-oceano); color: white; }
+
+        .config-link {
+            display: block;
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: #6b7280;
+            text-align: center;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        #configSection {
+            display: none;
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.85rem;
+            border: 1px dashed #cbd5e1;
+        }
+
+        #statusMsg {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            text-align: center;
+            display: none;
         }
     </style>
 </head>
 <body>
+
+<!-- Ícone Discreto no Canto Superior Esquerdo -->
+<button id="btnSecretAdmin" class="secret-admin-btn" title="Área Restrita">⚙️</button>
 
 <header>
     <h1>Bahamas East Village</h1>
@@ -144,13 +274,58 @@
     <input type="text" id="searchInput" placeholder="Pesquisar morador ou número da casa...">
 </div>
 
-<div class="container" id="gridMoradores">
-    <!-- Os cards serão gerados via JavaScript -->
+<div class="container" id="gridMoradores"></div>
+
+<!-- MODAL DE CADASTRO -->
+<div class="modal-overlay" id="modalAdmin">
+    <div class="modal-box">
+        <h2>Adicionar Morador</h2>
+
+        <form id="adminForm">
+            <div class="form-group">
+                <label for="inputNome">Nome:</label>
+                <input 
+                    type="text" 
+                    id="inputNome" 
+                    placeholder="Digite o nome completo" 
+                    required 
+                    autocomplete="off"
+                    pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$"
+                    title="Apenas letras e espaços são permitidos.">
+            </div>
+
+            <div class="form-group">
+                <label for="inputCasa">Núm. Casa:</label>
+                <input 
+                    type="number" 
+                    id="inputCasa" 
+                    placeholder="Número da unidade" 
+                    min="1" 
+                    step="1" 
+                    required>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn btn-cancel" id="btnCancel">Cancelar</button>
+                <button type="submit" class="btn btn-confirm" id="btnConfirm">Confirmar</button>
+            </div>
+        </form>
+
+        <div id="statusMsg"></div>
+
+        <span class="config-link" id="toggleConfig">⚙️ Configurar sincronização direta com GitHub</span>
+        <div id="configSection">
+            <p style="margin-bottom:8px;">Para salvar para todos sem subir arquivo manual:</p>
+            <input type="text" id="ghRepo" placeholder="usuario/repositorio (ex: joao/bahamas)" style="margin-bottom:6px; width:100%; padding:6px; font-size:0.8rem;">
+            <input type="password" id="ghToken" placeholder="GitHub Personal Access Token (PAT)" style="width:100%; padding:6px; font-size:0.8rem;">
+            <button type="button" id="btnSaveConfig" style="margin-top:6px; width:100%; padding:6px; font-size:0.8rem; cursor:pointer;">Salvar Configuração</button>
+        </div>
+    </div>
 </div>
 
 <script>
-    // Dados organizados (Agrupados por casa)
-    const dados = [
+    // DADOS INICIAIS
+    let dados = [
         {casa: 1, moradores: ["Daniely"]},
         {casa: 7, moradores: ["Karol Faria"]},
         {casa: 21, moradores: ["Renata Cynara", "??"]},
@@ -262,8 +437,14 @@
         {casa: 295, moradores: ["Daiane", "Ricardo Ribeiro"]},
         {casa: 297, moradores: ["Mychelly"]},
         {casa: 298, moradores: ["Ana", "Caio Jorge"]},
-        {casa: 299, moradores: ["Jony Costa", "Gracielle"]},
+        {casa: 299, moradores: ["Jony Costa", "Gracielle"]}
     ];
+
+    // Carregar do localStorage se houver dados salvos previamente
+    const dadosSalvos = localStorage.getItem('bahamas_moradores');
+    if (dadosSalvos) {
+        dados = JSON.parse(dadosSalvos);
+    }
 
     const grid = document.getElementById('gridMoradores');
     const searchInput = document.getElementById('searchInput');
@@ -302,8 +483,149 @@
         renderCards(e.target.value);
     });
 
-    // Inicializar
     renderCards();
+
+    // --- CONTROLE DO MODAL ---
+    const btnSecretAdmin = document.getElementById('btnSecretAdmin');
+    const modalAdmin = document.getElementById('modalAdmin');
+    const btnCancel = document.getElementById('btnCancel');
+    const adminForm = document.getElementById('adminForm');
+    const inputNome = document.getElementById('inputNome');
+    const inputCasa = document.getElementById('inputCasa');
+    const statusMsg = document.getElementById('statusMsg');
+
+    btnSecretAdmin.addEventListener('click', () => {
+        modalAdmin.style.display = 'flex';
+        inputNome.value = '';
+        inputCasa.value = '';
+        inputNome.focus();
+    });
+
+    btnCancel.addEventListener('click', () => {
+        modalAdmin.style.display = 'none';
+        statusMsg.style.display = 'none';
+    });
+
+    // Filtros de digitação: Apenas letras no nome
+    inputNome.addEventListener('keypress', (e) => {
+        if (!/^[A-Za-zÀ-ÖØ-öø-ÿ\s]$/.test(e.key)) {
+            e.preventDefault();
+        }
+    });
+
+    // Apenas inteiros positivos na casa
+    inputCasa.addEventListener('keydown', (e) => {
+        if (['-', '+', 'e', 'E', '.', ','].includes(e.key)) {
+            e.preventDefault();
+        }
+    });
+
+    // Submissão do formulário
+    adminForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const nome = inputNome.value.trim();
+        const numCasa = parseInt(inputCasa.value, 10);
+
+        if (!nome || isNaN(numCasa) || numCasa <= 0) return;
+
+        // Atualizar lista em memória
+        const casaObj = dados.find(item => item.casa === numCasa);
+        if (casaObj) {
+            const indexInterrogacao = casaObj.moradores.indexOf("??");
+            if (indexInterrogacao !== -1) {
+                casaObj.moradores[indexInterrogacao] = nome;
+            } else {
+                casaObj.moradores.push(nome);
+            }
+        } else {
+            dados.push({ casa: numCasa, moradores: [nome] });
+            dados.sort((a, b) => a.casa - b.casa);
+        }
+
+        // Salvar em localStorage
+        localStorage.setItem('bahamas_moradores', JSON.stringify(dados));
+        renderCards(searchInput.value);
+
+        // Se houver token GitHub configurado, envia o commit automático!
+        const ghToken = localStorage.getItem('bahamas_gh_token');
+        const ghRepo = localStorage.getItem('bahamas_gh_repo');
+
+        if (ghToken && ghRepo) {
+            statusMsg.style.display = 'block';
+            statusMsg.style.color = '#0077b6';
+            statusMsg.textContent = 'Enviando alteração direta para o GitHub...';
+
+            try {
+                await syncToGitHub(ghRepo, ghToken, dados);
+                statusMsg.style.color = 'green';
+                statusMsg.textContent = 'Atualizado com sucesso no GitHub!';
+                setTimeout(() => { modalAdmin.style.display = 'none'; statusMsg.style.display = 'none'; }, 1500);
+            } catch (err) {
+                statusMsg.style.color = 'red';
+                statusMsg.textContent = 'Salvo localmente, mas erro no GitHub: ' + err.message;
+            }
+        } else {
+            modalAdmin.style.display = 'none';
+        }
+    });
+
+    // Sincronização via API do GitHub
+    async function syncToGitHub(repo, token, novosDados) {
+        const filePath = 'index.html';
+        const url = `https://api.github.com/repos/${repo}/contents/${filePath}`;
+        
+        // 1. Obter o SHA do arquivo atual
+        const fileRes = await fetch(url, {
+            headers: { 'Authorization': `token ${token}` }
+        });
+        if (!fileRes.ok) throw new Error("Repositório ou arquivo não encontrado.");
+        const fileData = await fileRes.json();
+        
+        // 2. Decodificar conteúdo atual
+        let content = decodeURIComponent(escape(atob(fileData.content)));
+
+        // 3. Substituir o bloco `let dados = [...]` pelo novo
+        const jsonDados = JSON.stringify(novosDados, null, 8);
+        content = content.replace(/let dados = \[[\s\S]*?\];/, `let dados = ${jsonDados};`);
+
+        // 4. Enviar PUT de atualização
+        const putRes = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `token ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: "Atualização de moradores via painel web",
+                content: btoa(unescape(encodeURIComponent(content))),
+                sha: fileData.sha
+            })
+        });
+
+        if (!putRes.ok) throw new Error("Falha ao salvar no GitHub.");
+    }
+
+    // Configurações do GitHub (Opcional)
+    const toggleConfig = document.getElementById('toggleConfig');
+    const configSection = document.getElementById('configSection');
+    const ghRepoInput = document.getElementById('ghRepo');
+    const ghTokenInput = document.getElementById('ghToken');
+    const btnSaveConfig = document.getElementById('btnSaveConfig');
+
+    ghRepoInput.value = localStorage.getItem('bahamas_gh_repo') || '';
+    ghTokenInput.value = localStorage.getItem('bahamas_gh_token') || '';
+
+    toggleConfig.addEventListener('click', () => {
+        configSection.style.display = configSection.style.display === 'block' ? 'none' : 'block';
+    });
+
+    btnSaveConfig.addEventListener('click', () => {
+        localStorage.setItem('bahamas_gh_repo', ghRepoInput.value.trim());
+        localStorage.setItem('bahamas_gh_token', ghTokenInput.value.trim());
+        alert('Configurações salvas!');
+        configSection.style.display = 'none';
+    });
 </script>
 
 </body>
